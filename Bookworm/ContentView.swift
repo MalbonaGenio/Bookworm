@@ -19,7 +19,7 @@ struct ContentView: View {
         SortDescriptor(\Book.author)
     ]) var books: [Book]
     
-    //State to handle showing the form to add books from AddBookView
+    //State to handle showing the form to add books from AddBookView 
     @State var showingAddScreen = false
     
     var body: some View {
