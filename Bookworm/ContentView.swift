@@ -13,7 +13,11 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     // @Query will make SwiftData load books from the model container
-    @Query var books: [Book]
+    // Sort will order the books by title and if there is any identical title then sort those by Author
+    @Query(sort: [
+        SortDescriptor(\Book.title),
+        SortDescriptor(\Book.author)
+    ]) var books: [Book]
     
     //State to handle showing the form to add books from AddBookView
     @State var showingAddScreen = false
