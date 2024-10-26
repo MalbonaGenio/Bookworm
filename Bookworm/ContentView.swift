@@ -41,13 +41,18 @@ struct ContentView: View {
                         }
                     }
                 }
+                .onDelete(perform: deleteBooks)
             }
             .navigationTitle("Book Worm")
             .navigationDestination(for: Book.self) { book in
                 DetailView(book: book)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("Add Book", systemImage: "plus") {
                         showingAddScreen.toggle()
                     }
@@ -57,6 +62,18 @@ struct ContentView: View {
                 AddBookView()
             }
         }
+    }
+    
+    //Delete book in querry trough swiping using the .onDelete(perform: ) in the list view.
+    func deleteBooks(at offsets: IndexSet) {
+        for offset in offsets {
+            //Find the book in the querry
+            let book = books[offset]
+            //Find the specified book in the modelContext and delete it.
+            modelContext.delete(book)
+        }
+        
+        
     }
 }
 
